@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_tick-tack-toe" default="compile.module.tick-tack-toe">
+  <dirname property="module.tick-tack-toe.basedir" file="${ant.file.module_tick-tack-toe}"/>
+  
+  <property name="module.jdk.home.tick-tack-toe" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.tick-tack-toe" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.tick-tack-toe" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.tick-tack-toe" value="${compiler.args}"/>
+  
+  <property name="tick-tack-toe.output.dir" value="${module.tick-tack-toe.basedir}/out/production/tick-tack-toe"/>
+  <property name="tick-tack-toe.testoutput.dir" value="${module.tick-tack-toe.basedir}/out/test/tick-tack-toe"/>
+  
+  <path id="tick-tack-toe.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="tick-tack-toe.module.production.classpath">
+    <path refid="${module.jdk.classpath.tick-tack-toe}"/>
+  </path>
+  
+  <path id="tick-tack-toe.runtime.production.module.classpath">
+    <pathelement location="${tick-tack-toe.output.dir}"/>
+  </path>
+  
+  <path id="tick-tack-toe.module.classpath">
+    <path refid="${module.jdk.classpath.tick-tack-toe}"/>
+    <pathelement location="${tick-tack-toe.output.dir}"/>
+  </path>
+  
+  <path id="tick-tack-toe.runtime.module.classpath">
+    <pathelement location="${tick-tack-toe.testoutput.dir}"/>
+    <pathelement location="${tick-tack-toe.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.tick-tack-toe">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.tick-tack-toe">
+    <patternset refid="excluded.from.module.tick-tack-toe"/>
+  </patternset>
+  
+  <path id="tick-tack-toe.module.sourcepath">
+    <dirset dir="${module.tick-tack-toe.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.tick-tack-toe" depends="compile.module.tick-tack-toe.production,compile.module.tick-tack-toe.tests" description="Compile module tick-tack-toe"/>
+  
+  <target name="compile.module.tick-tack-toe.production" depends="register.custom.compilers" description="Compile module tick-tack-toe; production classes">
+    <mkdir dir="${tick-tack-toe.output.dir}"/>
+    <javac2 destdir="${tick-tack-toe.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.tick-tack-toe}/javac">
+      <compilerarg line="${compiler.args.tick-tack-toe}"/>
+      <bootclasspath refid="tick-tack-toe.module.bootclasspath"/>
+      <classpath refid="tick-tack-toe.module.production.classpath"/>
+      <src refid="tick-tack-toe.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.tick-tack-toe"/>
+    </javac2>
+    
+    <copy todir="${tick-tack-toe.output.dir}">
+      <fileset dir="${module.tick-tack-toe.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.tick-tack-toe.tests" depends="register.custom.compilers,compile.module.tick-tack-toe.production" description="compile module tick-tack-toe; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.tick-tack-toe" description="cleanup module">
+    <delete dir="${tick-tack-toe.output.dir}"/>
+    <delete dir="${tick-tack-toe.testoutput.dir}"/>
+  </target>
+</project>
