@@ -1,29 +1,30 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Coordinate {
-    private int x;
-    private int y;
+    private List<Integer> coordinates;
 
-    Coordinate (int x, int y) {
-        setX(x);
-        setY(y);
+    Coordinate () {
+        coordinates = new ArrayList<Integer>();
     }
 
-    public int getX() {
-        return x;
+    Coordinate (List<Integer> coordinates) {
+        setCoordinates(coordinates);
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public List<Integer> getCoordinates() {
+        return coordinates;
     }
 
-    public int getY() {
-        return y;
+    public void setCoordinates(List<Integer> coordinates) {
+        this.coordinates = coordinates;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public Coordinate Offset(Offset o) {
-        return new Coordinate(getX() + o.getXOffset(), getY() + o.getYOffset());
+    public Coordinate depose(Offset offset) {
+        ArrayList<Integer> c = new ArrayList<Integer>();
+        for (int i = 0; i < getCoordinates().size(); i++) {
+            c.add( getCoordinates().get(i) + offset.getOffset().get(i) );
+        }
+        return new Coordinate(c);
     }
 }

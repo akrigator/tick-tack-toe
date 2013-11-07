@@ -1,11 +1,13 @@
+import java.util.List;
+
 public class Cell {
     private char value;
     final private char defaultValue = '\0';
     private Coordinate coordinate;
 
-    Cell (int x, int y) {
+    Cell (List<Integer> coordinates) {
         setValue(defaultValue);
-        setCoordinate(new Coordinate(x, y));
+        setCoordinate(new Coordinate(coordinates));
     }
 
     public char getValue() {

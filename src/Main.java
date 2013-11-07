@@ -1,10 +1,12 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
     public static void main (String[] arg) {
-        final int fieldRows = 4;
-        final int fieldColumns = 4;
+        final List<Integer> fieldSize = Arrays.asList(4, 4);
         final int straightForWin = 3;
 
-        GamePlay game = new GamePlay(fieldRows, fieldColumns, straightForWin);
+        GamePlay game = new GamePlay(fieldSize, straightForWin);
 
         game.addPlayer('X');
         game.addPlayer('O');

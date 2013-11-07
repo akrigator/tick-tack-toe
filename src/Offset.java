@@ -1,13 +1,13 @@
+import java.util.List;
+
 public class Offset {
 
     private String directionName;
-    private int xOffset;
-    private int yOffset;
+    private List<Integer> offset;
 
-    Offset (int x, int y, String name) {
+    Offset(List<Integer> offset, String name) {
         setDirectionName(name);
-        setXOffset(x);
-        setYOffset(y);
+        setOffset(offset);
     }
 
     public String getDirectionName() {
@@ -18,19 +18,11 @@ public class Offset {
         this.directionName = directionName;
     }
 
-    public int getXOffset() {
-        return xOffset;
+    public void setOffset(List<Integer> offset) {
+        this.offset = offset;
     }
 
-    public void setXOffset(int xOffset) {
-        this.xOffset = xOffset;
-    }
-
-    public int getYOffset() {
-        return yOffset;
-    }
-
-    public void setYOffset(int yOffset) {
-        this.yOffset = yOffset;
+    public List<Integer> getOffset() {
+        return offset;
     }
 }

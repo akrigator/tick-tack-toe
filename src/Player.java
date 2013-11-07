@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Player {
@@ -17,10 +19,11 @@ public class Player {
 
     public Coordinate move() {
         Scanner in = new Scanner(System.in);
+        List<Integer> coordinates = new ArrayList<Integer>();
         System.out.print("Column: ");
-        int column = in.nextInt() - 1;
+        coordinates.add(in.nextInt() - 1);
         System.out.print("Row: ");
-        int row = in.nextInt() - 1;
-        return new Coordinate(row, column);
+        coordinates.add(in.nextInt() - 1);
+        return new Coordinate(coordinates);
     }
 }

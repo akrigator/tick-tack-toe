@@ -1,12 +1,13 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class GamePlay {
-    private ArrayList<Player> players;
+    private List<Player> players;
     private Field field;
 
-    GamePlay(int x, int y, int straight) {
+    GamePlay(List<Integer> fieldSize, int straight) {
         players = new ArrayList<Player>();
-        field = new Field(x,y,straight);
+        field = new Field(fieldSize, straight);
     }
 
     public void addPlayer(char mark) {
